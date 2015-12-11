@@ -12,6 +12,7 @@ $(document).ready(function() {
 	processBtn = document.getElementById("process");
 	resultsDisplay = document.getElementById("results_display");
 
+	//add onclick listener for "Generate data set" button
 	$(generateBtn).click(function() {
 		var recValue = numRecordsField.value.trim();
 		
@@ -28,6 +29,7 @@ $(document).ready(function() {
 		else alert("Please enter a positive integer value.");
 	}); //end click
 
+	//add onclick listener for "Process data set" button
 	$(processBtn).click(function() {
 		if(data && data.length > 0) {
 			results = processData();
@@ -42,6 +44,9 @@ $(document).ready(function() {
 	$(generateBtn).click(); //generate an initial set of data
 }); //end ready
 
+/**
+ * Helper function for generating random data set
+ */
 function generateData(numToGenerate) {
 	var people = new Array();
 
@@ -62,6 +67,9 @@ function generateData(numToGenerate) {
 	return people;
 } //end function generateData
 
+/**
+ * Helper function for processing generated data
+ */
 function processData() {
 	var resultsArr = new Array();
 	var years = new Object();
