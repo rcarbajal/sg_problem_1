@@ -11,12 +11,15 @@
 	
 	<body>
 		<div class="container">
-			Number of records to generate: <input type="text" id="num_records" size="5" />
+			Number of records to generate: <input type="text" id="num_records" size="5" value="50" />
 			<input type="button" id="generate" value="Generate data set" />
 			<br /><br />
-			<div id="data_display"></div>
+			<div id="data_display" class="results_display"></div>
 		</div>
 		<div class="container">
+			<input type="button" id="process" value="Process data" />
+			<br /><br />
+			<div id="results_display" class="results_display"></div>
 		</div>
 		<br class="clear" />
 	</body>
