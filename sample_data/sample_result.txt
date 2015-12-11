@@ -1,0 +1,5 @@
+Maximum number of people alive: 22
+Years with max people alive:
+    1966
+    1967
+    1968

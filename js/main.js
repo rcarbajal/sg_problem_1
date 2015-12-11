@@ -1,7 +1,7 @@
 var MIN_YEAR = 1900;
 var MAX_YEAR = 2000;
 
-var generateBtn, dataDisplay, numRecordsField, processBtn, resultsDisplay;
+var generateBtn, dataDisplay, numRecordsField, resultsDisplay;
 var data = new Array();
 var results = new Array();
 
@@ -9,8 +9,20 @@ $(document).ready(function() {
 	generateBtn = document.getElementById("generate");
 	dataDisplay = document.getElementById("data_display");
 	numRecordsField = document.getElementById("num_records");
-	processBtn = document.getElementById("process");
 	resultsDisplay = document.getElementById("results_display");
+
+	//import our initial dataset
+	for(var i = 0; i < INITIAL_DATASET.length; ++i) {
+		var currDataItem = INITIAL_DATASET[i];
+
+		var p = new Person();
+		p.firstName = currDataItem[0];
+		p.lastName = currDataItem[1];
+		p.birthYear = currDataItem[2];
+		p.deathYear = currDataItem[3];
+
+		data.push(p);
+	} //end for
 
 	//add onclick listener for "Generate data set" button
 	$(generateBtn).click(function() {
@@ -20,17 +32,13 @@ $(document).ready(function() {
 			dataDisplay.innerHTML = "";
 			
 			data = generateData(recValue);
-			var str = "";
-			for(var i = 0; i < data.length; ++i) {
-				str = data[i].lastName + "," + data[i].firstName + "," + data[i].birthYear + "," + data[i].deathYear;
-				dataDisplay.innerHTML += str + "<br />";
-			} //end for
+			writeDataToScreen();
 		} //end if
 		else alert("Please enter a positive integer value.");
 	}); //end click
 
 	//add onclick listener for "Process data set" button
-	$(processBtn).click(function() {
+	$("#process").click(function() {
 		if(data && data.length > 0) {
 			results = processData();
 
@@ -41,7 +49,8 @@ $(document).ready(function() {
 		else alert("Please generate a dataset before attempting to process.");
 	}); //end click
 
-	$(generateBtn).click(); //generate an initial set of data
+	//$(generateBtn).click(); //generate an initial set of data
+	writeDataToScreen(); //write our initial data for display purposes
 }); //end ready
 
 /**
@@ -50,7 +59,7 @@ $(document).ready(function() {
 function generateData(numToGenerate) {
 	var people = new Array();
 
-	var fnLength = FIRST_NAMES.length; //first and last names arrays are defined in names.js
+	var fnLength = FIRST_NAMES.length; //first and last names arrays are defined in data.js
 	var lnLength = LAST_NAMES.length;
 	for(var i = 0; i < numToGenerate; ++i) {
 		//create randomly generated person
@@ -103,6 +112,14 @@ function processData() {
 function getRandomNumber(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 } //end method getRandomNumber
+
+function writeDataToScreen() {
+		var str = "";
+		for(var i = 0; i < data.length; ++i) {
+			str = data[i].lastName + "," + data[i].firstName + "," + data[i].birthYear + "," + data[i].deathYear;
+			dataDisplay.innerHTML += str + "<br />";
+		} //end for
+} //end writeDataToScreen
 
 /**
  * Person class definition
